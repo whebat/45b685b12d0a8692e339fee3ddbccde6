@@ -1,9 +1,25 @@
+# Table of Contents
+
+<!-- TOC -->
+* [Table of Contents](#table-of-contents)
+* [Useful Resources](#useful-resources)
+* [Notes from Slides](#notes-from-slides)
+  * [Namespace](#namespace)
+  * [Arguments for main()](#arguments-for-main--)
+  * [Unsigned](#unsigned)
+  * [Chaining the operator `=`](#chaining-the-operator-)
+  * [Function prototype](#function-prototype)
+  * [Function definition](#function-definition)
+  * [Memory](#memory)
+    * [Null Pointers](#null-pointers)
+* [Notes from Sites](#notes-from-sites)
+  * [Operators](#operators)
+<!-- TOC -->
+
 # Useful Resources
 
 * https://en.cppreference.com/w/cpp
 * https://learnxinyminutes.com/docs/c++/
-
----
 
 # Notes from Slides
 
@@ -110,8 +126,8 @@
 * `nullptr` is always a pointer type, `NULL` is not.
 * Hence, when using `NULL`, `ptr` may be treated as a integer 0.
 * This will not happen when using `nullptr`.
-  * Must compile with `-std=c++11` or newer.
-  * Otherwise, `Error: nullptr is not defined.`
+    * Must compile with `-std=c++11` or newer.
+    * Otherwise, `Error: nullptr is not defined.`
 
 # Notes from Sites
 
