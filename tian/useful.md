@@ -12,6 +12,10 @@
   * [Function definition](#function-definition)
   * [Memory](#memory)
     * [Null Pointers](#null-pointers)
+  * [Arrays](#arrays)
+    * [Classical Arrays vs. Array Containers](#classical-arrays-vs-array-containers)
+    * [Initializing](#initializing)
+    * [Passing Arrays to Functions](#passing-arrays-to-functions)
 * [Notes from Sites](#notes-from-sites)
   * [Operators](#operators)
 <!-- TOC -->
@@ -182,7 +186,7 @@
       printArray[&A[1], 9];  // Print last 9 elements.
       ```
   * In Python:
-    * ```pycon
+    * ```python
       A: list = [1,2,3,4,5,6,7,8,9,10]
       print(A)       # Print all 10 elements.
       print(A[1:10]) # Print last 9 elements.
