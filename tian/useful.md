@@ -163,14 +163,14 @@
   * Use `const` to make the array immutable in the function.
 * Multidimensional arrays only allow the 1st dimension's size to be omitted.
   * ```cpp
-    void print3D(const int myArray[][3][3])   // valid.
-    void print3D(const int myArray[3][3][3])  // valid.
-    void print3D(const int myArray[3][][3])   // invalid.
-    void print3D(const int myArray[3][3][])   // invalid.
-    void print3D(const int myArray[3][][])    // invalid.
-    void print3D(const int myArray[][3][])    // invalid.
-    void print3D(const int myArray[][][3])    // invalid.
-    void print3D(const int myArray[][][])     // invalid.
+    void print3D(const int myArray[][3][3]);   // valid.
+    void print3D(const int myArray[3][3][3]);  // valid.
+    void print3D(const int myArray[3][][3]);   // invalid.
+    void print3D(const int myArray[3][3][]);   // invalid.
+    void print3D(const int myArray[3][][]);    // invalid.
+    void print3D(const int myArray[][3][]);    // invalid.
+    void print3D(const int myArray[][][3]);    // invalid.
+    void print3D(const int myArray[][][]);     // invalid.
     ```
 * You can pass a "slice" (like in Python or Go) of an array to a function.
   * Given the following:
@@ -191,6 +191,59 @@
       print(A)       # Print all 10 elements.
       print(A[1:10]) # Print last 9 elements.
       ```
+
+### Pointers to Arrays
+* ```cpp
+  int A[10];
+  int *B = A;
+  
+  /// Same thing
+  std::cout << *B   << std::endl;
+  std::cout << A[0] << std::endl;
+  ```
+* Hence `B[5]` is the same as `A[5]`.
+* But, `int A; int *B = &A;` allows `B[7]` or `B[10]`.
+  * For pointers to arrays, do not access indexes outside the upper bound.
+  * For pointers to integers, do not use indexes.
+
+## Loops
+* Infinite loops:
+  ```cpp
+  while (true) { break; }
+  for (;;)     { break; }
+  do           { break; } while (true);
+  ```
+* Range for loop:
+  ```cpp
+  std::string str("Hello world");
+  
+  /// By value
+  for (char c: str) {
+    cout << c;
+  }
+  cout << endl;
+  
+  /// By reference
+  for (char &c: str) {
+    cout << c;
+  }
+  ```
+
+## Default Arguments to functions
+```cpp
+void printGreeting(string message = "Hello, ", string name = "John");
+int main() {
+    string studentName = "Mike";
+    string studentGreeting = "Good morning, ";
+    printGreeting(studentGreeting, studentName); // Good morning, Mike
+    printGreeting(studentGreeting);              // Good morning, John
+    printGreeting();                             // Hello, John
+    printGreeting(studentName);                  // MikeJohn
+}
+// function definition ...
+// ...
+// ...
+```
 
 # Notes from Sites
 
