@@ -124,10 +124,69 @@
   int *ptr = nullptr; // C++11 literal.
   ```
 * `nullptr` is always a pointer type, `NULL` is not.
-* Hence, when using `NULL`, `ptr` may be treated as a integer 0.
+* Hence, when using `NULL`, `ptr` may be treated as an integer 0.
 * This will not happen when using `nullptr`.
     * Must compile with `-std=c++11` or newer.
     * Otherwise, `Error: nullptr is not defined.`
+
+## Arrays
+
+### Classical Arrays vs. Array Containers
+* ```cpp
+  #include <array>
+  std::array<int, 4> arrayContainer;
+  int arrayClassical[4];
+  ```
+  * The memory location is set up, but there's no initialization.
+  * To initialize all four locations to 0...
+    * ```cpp
+      std::array<int, 4> arrayContainer = {0};
+      int arrayClassical[4] = {0}; 
+      ```
+* The `[]` is referred to as subscripting.
+
+### Initializing
+* ```cpp
+  const unsigned myArraySize = 3;
+  int ia1[myArraySize] = {24, 36, 86};
+  int ia2[] = {33, 21, 75}; // Size is inferred.
+  int ia3[] = {9, 12};      // ia3[2] is defaulted to '0'.
+  ```
+* The string datatype will default to `""` (empty string) for any elements uninitialized.
+
+### Passing Arrays to Functions
+* By default, **arrays are passed to functions by reference**.
+  * Use `const` to make the array immutable in the function.
+* Multidimensional arrays only allow the 1st dimension's size to be omitted.
+  * ```cpp
+    void print3D(const int myArray[][3][3])   // valid.
+    void print3D(const int myArray[3][3][3])  // valid.
+    void print3D(const int myArray[3][][3])   // invalid.
+    void print3D(const int myArray[3][3][])   // invalid.
+    void print3D(const int myArray[3][][])    // invalid.
+    void print3D(const int myArray[][3][])    // invalid.
+    void print3D(const int myArray[][][3])    // invalid.
+    void print3D(const int myArray[][][])     // invalid.
+    ```
+* You can pass a "slice" (like in Python or Go) of an array to a function.
+  * Given the following:
+    * ```cpp
+      void printArray(int arr[], int n);
+      ```
+    * ```cpp
+      int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+      ```
+    * ```cpp
+      printArray[A, 10];     // Print all 10 elements.
+      printArray[&A[0], 10]; // Print all 10 elements.
+      printArray[&A[1], 9];  // Print last 9 elements.
+      ```
+  * In Python:
+    * ```pycon
+      A: list = [1,2,3,4,5,6,7,8,9,10]
+      print(A)       # Print all 10 elements.
+      print(A[1:10]) # Print last 9 elements.
+      ```
 
 # Notes from Sites
 
