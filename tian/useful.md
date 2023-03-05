@@ -16,6 +16,9 @@
     * [Classical Arrays vs. Array Containers](#classical-arrays-vs-array-containers)
     * [Initializing](#initializing)
     * [Passing Arrays to Functions](#passing-arrays-to-functions)
+    * [Pointers to Arrays](#pointers-to-arrays)
+  * [Loops](#loops)
+  * [Default Arguments to functions](#default-arguments-to-functions)
 * [Notes from Sites](#notes-from-sites)
   * [Operators](#operators)
 <!-- TOC -->
@@ -176,14 +179,15 @@
   * Given the following:
     * ```cpp
       void printArray(int arr[], int n);
-      ```
-    * ```cpp
-      int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-      ```
-    * ```cpp
-      printArray[A, 10];     // Print all 10 elements.
-      printArray[&A[0], 10]; // Print all 10 elements.
-      printArray[&A[1], 9];  // Print last 9 elements.
+      int main() {
+        int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        printArray[A, 10];     // Print all 10 elements.
+        printArray[&A[0], 10]; // Print all 10 elements.
+        printArray[&A[1], 9];  // Print last 9 elements.
+      }
+      // function definition ...
+      // ...
+      // ...
       ```
   * In Python:
     * ```python
@@ -223,18 +227,25 @@
   }
   cout << endl;
   
-  /// By reference
+  /// By reference.
   for (char &c: str) {
     cout << c;
   }
+  cout << endl;
+  
+  /// By reference, same as above.
+  for (auto &c: str) {
+    cout << c;
+  }
+  cout << endl;
   ```
 
 ## Default Arguments to functions
 ```cpp
 void printGreeting(string message = "Hello, ", string name = "John");
 int main() {
-    string studentName = "Mike";
-    string studentGreeting = "Good morning, ";
+    std::string studentName = "Mike";
+    std::string studentGreeting = "Good morning, ";
     printGreeting(studentGreeting, studentName); // Good morning, Mike
     printGreeting(studentGreeting);              // Good morning, John
     printGreeting();                             // Hello, John
@@ -244,6 +255,52 @@ int main() {
 // ...
 // ...
 ```
+
+## Void Pointers: `void*`
+* Hold the address of any type.
+* Type being held is **not** known.
+* Useful when dealing with memory as memory, without accessing the content.
+  * For example, `sizeof(void*)` is 4, or something like that.
+* Cannot dereference directly.
+* Can dereference with casting.
+  * ```cpp
+    int i = 10;
+    void *vp = &i;
+    
+    // Option 1
+    int *ip = static_cast<int*>(vp);
+    cout << *ip << endl;
+    
+    // Option 2
+    cout << *(static_cast<int*>(vp)) << endl;
+    
+    // Option 3 (S2d.ppt Slide 19)
+    cout << *((int*)vp) << endl;
+    ```
+  * If the void pointer is not cast to the correct type, undefined behavior will happen.
+
+## Renaming with `typedef`
+* ```cpp
+  #include <cstdint>
+  typedef uint8_t   u8;
+  typedef uint16_t  u16;
+  typedef uint32_t  u32;
+  typedef uint64_t  u64;
+  typedef int8_t    i8;
+  typedef int16_t   i16;
+  typedef int32_t   i32;
+  typedef int64_t   i64;
+  int main {
+      u8 myU8 = -1;  // 255                  (2^8 - 1)
+      u16 myU8 = -1; // 65535                (2^16 - 1)
+      u32 myU8 = -1; // 4294967295           (2^32 - 1)
+      u64 myU8 = -1; // 18446744073709551615 (2^64 - 1)
+  };
+  ```
+* Using `typedef` has the potential to make code difficult to read.
+* Its use should primarily be restricted to header files which "end users" don't see.
+* You can do something like `typedef int* intp` (S2d.ppt, slide 21)
+  * Don't actually do this.
 
 # Notes from Sites
 
@@ -270,5 +327,3 @@ int main() {
       a++
       a--
       ```
-
----
