@@ -281,7 +281,10 @@ int main() {
     ```
   * If the void pointer is not cast to the correct type, undefined behavior will happen.
 
-## Renaming with `typedef`
+## Renaming with `typedef` or `using`
+
+### Renaming with `typedef`
+
 * ```cpp
   #include <cstdint>
   typedef uint8_t   u8;
@@ -303,6 +306,58 @@ int main() {
 * Its use should primarily be restricted to header files which "end users" don't see.
 * You can do something like `typedef int* intp` (S2d.ppt, slide 21)
   * Don't actually do this.
+
+### Renaming with `using`
+ 
+* ```cpp
+  typedef double f64;
+  using longfloat = f64;
+  longfloat myVariable = 5.6;
+  ```
+
+## The `auto` keyword
+* Introduced in C++11.
+* **Compiler** figures out the variable's type **based on the initializer**.
+
+## Static
+* ```cpp
+  int val() {
+    static int static_val = 0;
+    return ++val;
+  }
+  
+  int main()
+  {
+    for (int i = 0; i < 100; i++) {
+        std::cout << val() << ' ';
+    }
+  }
+  ```
+
+## Dynamic Memory
+* ```cpp
+  int *ip = new int(420);
+  int *iA = new int[100];
+  ```
+
+## IO
+
+### Text File Streams
+* ```cpp
+  #include <fstream>
+  string str = "filename.txt"
+  ifstream ifs(str);
+  if (ifs.is_open()) {
+    
+    // Do stuff
+  
+    ifs.close()
+  } else {
+    // Unable to open file.
+    // File does not exist?
+    // Typo in filename?
+  }
+  ```
 
 # Notes from Sites
 
