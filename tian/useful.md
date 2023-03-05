@@ -90,7 +90,7 @@
       ```
     * Differences between rValue and pValue:
         * pValue has its own address in memory.
-        * ```txt
+        * ```
           -------------------
           | Address | Value |
           |---------|-------|
