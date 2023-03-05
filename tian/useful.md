@@ -95,8 +95,23 @@
           | Address | Value |
           |---------|-------|
           | 1000    | 41    | value, rValue
+          | 1008    |       | 
           | 1016    | 1000  | pValue
           ```
+
+### Null Pointers
+
+* Use 0, `NULL`, or `nullptr`
+* ```cpp
+  int *ptr = 0;
+  int *ptr = NULL;    // cstdlib header, or <stddef.h>
+  int *ptr = nullptr; // C++11 literal.
+  ```
+* `nullptr` is always a pointer type, `NULL` is not.
+* Hence, when using `NULL`, `ptr` may be treated as a integer 0.
+* This will not happen when using `nullptr`.
+  * Must compile with `-std=c++11` or newer.
+  * Otherwise, `Error: nullptr is not defined.`
 
 # Notes from Sites
 
