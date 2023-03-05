@@ -19,6 +19,8 @@
     * [Pointers to Arrays](#pointers-to-arrays)
   * [Loops](#loops)
   * [Default Arguments to functions](#default-arguments-to-functions)
+  * [Void Pointers: `void*`](#void-pointers--void)
+  * [Renaming with `typedef`](#renaming-with-typedef)
 * [Notes from Sites](#notes-from-sites)
   * [Operators](#operators)
 <!-- TOC -->
@@ -291,10 +293,10 @@ int main() {
   typedef int32_t   i32;
   typedef int64_t   i64;
   int main {
-      u8 myU8 = -1;  // 255                  (2^8 - 1)
-      u16 myU8 = -1; // 65535                (2^16 - 1)
-      u32 myU8 = -1; // 4294967295           (2^32 - 1)
-      u64 myU8 = -1; // 18446744073709551615 (2^64 - 1)
+      u8  myU8 = -1;  // 255                  (2^8 - 1)
+      u16 myU16 = -1; // 65535                (2^16 - 1)
+      u32 myU32 = -1; // 4294967295           (2^32 - 1)
+      u64 myU64 = -1; // 18446744073709551615 (2^64 - 1)
   };
   ```
 * Using `typedef` has the potential to make code difficult to read.
