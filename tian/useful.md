@@ -32,7 +32,7 @@
   * [The `extern` keyword](#the-extern-keyword)
   * [The `assert` keyword](#the-assert-keyword)
   * [Makefile/makefile and `make`](#makefilemakefile-and-make)
-  * [Segementation Fault & Bus Fault](#segementation-fault--bus-fault)
+  * [Segmentation Fault & Bus Fault](#segmentation-fault--bus-fault)
   * [User-Defined Types](#user-defined-types)
   * [Randomness](#randomness)
     * [Pre C++11: `rand()`](#pre-c11--rand)
@@ -40,9 +40,13 @@
   * [OOP Nonsense](#oop-nonsense)
     * [Encapsulation](#encapsulation)
     * [UML Visibility Prefixes](#uml-visibility-prefixes)
+    * [UML Relationship](#uml-relationship)
+    * [Diamond problem](#diamond-problem)
   * [Operator Overloading](#operator-overloading)
     * [Can Overload](#can-overload)
     * [Cannot overload](#cannot-overload)
+  * [Generic Programming](#generic-programming)
+  * [RAII](#raii)
 * [Notes from Sites](#notes-from-sites)
   * [Operators](#operators)
 <!-- TOC -->
@@ -506,7 +510,7 @@ int main() {
 * Macros are defined like `CC=g++` and `CCFLAGS=-std=c++11 -Wall`
     * These variables are **not the same** as the ones defined by the shell.
 
-## Segementation Fault & Bus Fault
+## Segmentation Fault & Bus Fault
 
 * Segmentation Fault:
     * Trying to use memory which does not belong to you.
@@ -616,6 +620,41 @@ int main() {
     +---------------------|
     ```
 
+### UML Relationship
+* Dependency
+  * Dotted Arrow
+  * A Library depends on `1..*` Publisher
+  * `Library - - - - - > * Publisher`
+* Association
+  * Usually no arrows needed.
+* Aggregation
+  * White diamond
+  * Book points to Library.
+  * Book points to Office.
+  * `Library <>--- Book`
+  * Hence, a Book does not solely exist for class Library.
+* Composition
+  * Black Diamond
+  * Head points to Person.
+  * `Person <>--- Head`
+  * Hand points to Person.
+  * Leg points to Person.
+  * The Head, Hand, and Leg classes exists solely for class Person.
+* Generalisation
+  * Arrow.
+  * Derived class points to base class. 
+
+### Diamond problem
+* Base class is Person
+  * Student inherits Person
+  * Employee inherits Person
+  * StudentEmployee inherits Student and Employee
+    * C++ supports multiple inheritance
+* Solution:
+  * class Student : virtual public Person {...};
+  * class Employee : virtual public Person {...};
+  * StudentEmployee will only have access to one copy of the Person class.
+
 ## Operator Overloading
 
 ### Can Overload
@@ -630,6 +669,50 @@ int main() {
 * `::` - Scope resolution operator
 * `? :` - Conditional operator
 * `sizeof()` - function
+
+## Generic Programming
+* ```cpp
+  template<typename T>
+  double scalar_difference(T arg1, T arg2)
+  {
+    return abs(arg1.getScalarValue() - arg2.getScalarValue());
+  };
+  ```
+* ```cpp
+  #include <iostream>
+
+  template<typename T>
+  T sum(T a, T b)
+  {
+    return a + b;
+  }
+  
+  int main()
+  {
+    int i = 1;
+    int j = 2;
+    double x = 1.5;
+    double y = 2.5;
+    std::cout << sum(i, j) << std::endl; // prints 3
+    std::cout << sum(x, y) << std::endl; // prints 4 (NOT 4.0)
+
+    // std::cout << sum(i, x) << std::endl;
+    // error: no matching function for call to ‘sum(int&, double&)’
+    // note:   template argument deduction/substitution failed:
+    // note:   deduced conflicting types for parameter ‘T’ (‘int’ and ‘double’)
+
+    return 0;
+  }
+  ```
+  
+## RAII
+* Resource Acquisition is initialisation
+* Encapsulate each resource into a class
+* Constructor acquires the resource
+  * establishes all class invariants
+  * throws exception if cant be done.
+* Destructor releases the resource
+  * Never throws exceptions
 
 # Notes from Sites
 
