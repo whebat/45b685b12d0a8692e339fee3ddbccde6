@@ -622,18 +622,22 @@ int main() {
 
 ### UML Relationship
 * Dependency
+  * **A dependency is a relationship where a class uses another class, but has no ownership or control over it. This means that changes to the dependent class may affect the class that depends on it, but not the other way around.**
   * Dotted Arrow
   * A Library depends on `1..*` Publisher
   * `Library - - - - - > * Publisher`
 * Association
+  * **An association is a relationship where two classes are linked together in some way, but neither class owns the other.**
   * Usually no arrows needed.
 * Aggregation
+  * **Aggregation is a type of association where one class is part of another class, but can exist independently of it.**
   * White diamond
   * Book points to Library.
   * Book points to Office.
   * `Library <>--- Book`
   * Hence, a Book does not solely exist for class Library.
 * Composition
+  * **Composition is a type of aggregation where one class is part of another class, and cannot exist independently of it.**
   * Black Diamond
   * Head points to Person.
   * `Person <>--- Head`
@@ -641,8 +645,11 @@ int main() {
   * Leg points to Person.
   * The Head, Hand, and Leg classes exists solely for class Person.
 * Generalisation
+  * **Generalization is a relationship where one class is a more general version of another class.**
   * Arrow.
   * Derived class points to base class. 
+
+
 
 ### Diamond problem
 * Base class is Person
