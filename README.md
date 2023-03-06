@@ -1,4 +1,4 @@
-# 45b685b12d0a8692e339fee3ddbccde6
+# Exam Notes
 
 * [18](https://github.com/whebat/45b685b12d0a8692e339fee3ddbccde6/blob/main/tian/2018.md)
 * [18 CPP](https://github.com/whebat/45b685b12d0a8692e339fee3ddbccde6/blob/main/tian/2018.cpp)
