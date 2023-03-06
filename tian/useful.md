@@ -1,28 +1,37 @@
 # Table of Contents
 
 <!-- TOC -->
+
 * [Table of Contents](#table-of-contents)
 * [Useful Resources](#useful-resources)
 * [Notes from Slides](#notes-from-slides)
-  * [Namespace](#namespace)
-  * [Arguments for main()](#arguments-for-main--)
-  * [Unsigned](#unsigned)
-  * [Chaining the operator `=`](#chaining-the-operator-)
-  * [Function prototype](#function-prototype)
-  * [Function definition](#function-definition)
-  * [Memory](#memory)
-    * [Null Pointers](#null-pointers)
-  * [Arrays](#arrays)
-    * [Classical Arrays vs. Array Containers](#classical-arrays-vs-array-containers)
-    * [Initializing](#initializing)
-    * [Passing Arrays to Functions](#passing-arrays-to-functions)
-    * [Pointers to Arrays](#pointers-to-arrays)
-  * [Loops](#loops)
-  * [Default Arguments to functions](#default-arguments-to-functions)
-  * [Void Pointers: `void*`](#void-pointers--void)
-  * [Renaming with `typedef`](#renaming-with-typedef)
+    * [Namespace](#namespace)
+    * [Arguments for main()](#arguments-for-main--)
+    * [Unsigned](#unsigned)
+    * [Chaining the operator `=`](#chaining-the-operator-)
+    * [Function prototype](#function-prototype)
+    * [Function definition](#function-definition)
+    * [Memory](#memory)
+        * [Null Pointers](#null-pointers)
+    * [Arrays](#arrays)
+        * [Classical Arrays vs. Array Containers](#classical-arrays-vs-array-containers)
+        * [Initializing](#initializing)
+        * [Passing Arrays to Functions](#passing-arrays-to-functions)
+        * [Pointers to Arrays](#pointers-to-arrays)
+    * [Loops](#loops)
+    * [Default Arguments to functions](#default-arguments-to-functions)
+    * [Void Pointers: `void*`](#void-pointers--void)
+    * [Renaming with `typedef` or `using`](#renaming-with-typedef-or-using)
+        * [Renaming with `typedef`](#renaming-with-typedef)
+        * [Renaming with `using`](#renaming-with-using)
+    * [The `auto` keyword](#the-auto-keyword)
+    * [Static](#static)
+    * [Dynamic Memory](#dynamic-memory)
+    * [IO](#io)
+        * [Text File Streams](#text-file-streams)
 * [Notes from Sites](#notes-from-sites)
-  * [Operators](#operators)
+    * [Operators](#operators)
+
 <!-- TOC -->
 
 # Useful Resources
@@ -141,20 +150,22 @@
 ## Arrays
 
 ### Classical Arrays vs. Array Containers
+
 * ```cpp
   #include <array>
   std::array<int, 4> arrayContainer;
   int arrayClassical[4];
   ```
-  * The memory location is set up, but there's no initialization.
-  * To initialize all four locations to 0...
-    * ```cpp
+    * The memory location is set up, but there's no initialization.
+    * To initialize all four locations to 0...
+        * ```cpp
       std::array<int, 4> arrayContainer = {0};
       int arrayClassical[4] = {0}; 
       ```
 * The `[]` is referred to as subscripting.
 
 ### Initializing
+
 * ```cpp
   const unsigned myArraySize = 3;
   int ia1[myArraySize] = {24, 36, 86};
@@ -164,10 +175,11 @@
 * The string datatype will default to `""` (empty string) for any elements uninitialized.
 
 ### Passing Arrays to Functions
+
 * By default, **arrays are passed to functions by reference**.
-  * Use `const` to make the array immutable in the function.
+    * Use `const` to make the array immutable in the function.
 * Multidimensional arrays only allow the 1st dimension's size to be omitted.
-  * ```cpp
+    * ```cpp
     void print3D(const int myArray[][3][3]);   // valid.
     void print3D(const int myArray[3][3][3]);  // valid.
     void print3D(const int myArray[3][][3]);   // invalid.
@@ -178,8 +190,8 @@
     void print3D(const int myArray[][][]);     // invalid.
     ```
 * You can pass a "slice" (like in Python or Go) of an array to a function.
-  * Given the following:
-    * ```cpp
+    * Given the following:
+        * ```cpp
       void printArray(int arr[], int n);
       int main() {
         int A[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -191,14 +203,15 @@
       // ...
       // ...
       ```
-  * In Python:
-    * ```python
+    * In Python:
+        * ```python
       A: list = [1,2,3,4,5,6,7,8,9,10]
       print(A)       # Print all 10 elements.
       print(A[1:10]) # Print last 9 elements.
       ```
 
 ### Pointers to Arrays
+
 * ```cpp
   int A[10];
   int *B = A;
@@ -209,10 +222,11 @@
   ```
 * Hence `B[5]` is the same as `A[5]`.
 * But, `int A; int *B = &A;` allows `B[7]` or `B[10]`.
-  * For pointers to arrays, do not access indexes outside the upper bound.
-  * For pointers to integers, do not use indexes.
+    * For pointers to arrays, do not access indexes outside the upper bound.
+    * For pointers to integers, do not use indexes.
 
 ## Loops
+
 * Infinite loops:
   ```cpp
   while (true) { break; }
@@ -243,6 +257,7 @@
   ```
 
 ## Default Arguments to functions
+
 ```cpp
 void printGreeting(string message = "Hello, ", string name = "John");
 int main() {
@@ -259,13 +274,14 @@ int main() {
 ```
 
 ## Void Pointers: `void*`
+
 * Hold the address of any type.
 * Type being held is **not** known.
 * Useful when dealing with memory as memory, without accessing the content.
-  * For example, `sizeof(void*)` is 4, or something like that.
+    * For example, `sizeof(void*)` is 4, or something like that.
 * Cannot dereference directly.
 * Can dereference with casting.
-  * ```cpp
+    * ```cpp
     int i = 10;
     void *vp = &i;
     
@@ -279,7 +295,7 @@ int main() {
     // Option 3 (S2d.ppt Slide 19)
     cout << *((int*)vp) << endl;
     ```
-  * If the void pointer is not cast to the correct type, undefined behavior will happen.
+    * If the void pointer is not cast to the correct type, undefined behavior will happen.
 
 ## Renaming with `typedef` or `using`
 
@@ -305,10 +321,10 @@ int main() {
 * Using `typedef` has the potential to make code difficult to read.
 * Its use should primarily be restricted to header files which "end users" don't see.
 * You can do something like `typedef int* intp` (S2d.ppt, slide 21)
-  * Don't actually do this.
+    * Don't actually do this.
 
 ### Renaming with `using`
- 
+
 * ```cpp
   typedef double f64;
   using longfloat = f64;
@@ -316,10 +332,12 @@ int main() {
   ```
 
 ## The `auto` keyword
+
 * Introduced in C++11.
 * **Compiler** figures out the variable's type **based on the initializer**.
 
 ## Static
+
 * ```cpp
   int val() {
     static int static_val = 0;
@@ -335,6 +353,7 @@ int main() {
   ```
 
 ## Dynamic Memory
+
 * ```cpp
   int *ip = new int(420);
   int *iA = new int[100];
@@ -343,6 +362,7 @@ int main() {
 ## IO
 
 ### Text File Streams
+
 * ```cpp
   #include <fstream>
   string str = "filename.txt"
@@ -357,6 +377,65 @@ int main() {
     // File does not exist?
     // Typo in filename?
   }
+  ```
+
+## Preprocessor
+* ```cpp
+  /// @file   MyTemplates.h
+  #ifndef MyTemplates_H
+  #define MyTemplates_H
+  
+  // #include statement is always after #define
+  #include <algorithm>
+  
+  // Implementation here
+  
+  #endif // MyTemplates_H
+  ```
+* The file should end at the `#endif` line.
+* Definitions:
+  * `#ifndef` if not defined.
+  * `#define` defines a macro.
+    * Specifies a preprocessor variable.
+    * Used in the text of our program.
+    * Literally **preprocessed**, i.e. prior to the rest of the compilation.
+  * `#ifdef` if defined.
+  * `#endif` end of preprocessor directive block.
+* Why use `#ifndef` and `#endif`?
+  * Avoid multiple inclusion.
+    * Make sure we don't include the same header files through multiple paths.
+  * This is known as a **header guard**.
+  * Definitions are often only allowed to be made once.
+
+## The `extern` keyword
+* ```cpp
+  /// @file MyTemplates.h
+  #ifndef MyTemplates_H
+  #define MyTemplates_H
+  
+  // Declare variable.
+  extern unsigned int global_call_count;
+  
+  #endif // MyTemplates_H
+  ```
+* Use `extern` to indicate a variable has been defined elsewhere.
+* ```cpp
+  /// @file main.cpp
+  #include <iostream>
+  #include "MyTemplates.h"
+  
+  // Definition checked against declaration.
+  unsigned int global_call_count = 0;
+  
+  int main() {
+    for (int i = 0; i < 10; i++) {
+        std::cout << global_call_count++ << ' ';
+    }
+    std::cout << std::endl;
+    return 0;
+  }
+  
+  #endif // MyTemplates_H
   ```
 
 # Notes from Sites
