@@ -381,7 +381,7 @@ int main() {
 
 ## Preprocessor
 * ```cpp
-  /// @file   MyTemplates.h
+  /// @file MyTemplates.h
   #ifndef MyTemplates_H
   #define MyTemplates_H
   
@@ -425,7 +425,7 @@ int main() {
   #include "MyTemplates.h"
   
   // Definition checked against declaration.
-  unsigned int global_call_count = 0;
+  unsigned int global_call_count = 50;
   
   int main() {
     for (int i = 0; i < 10; i++) {
