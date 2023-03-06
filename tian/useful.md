@@ -37,6 +37,12 @@
   * [Randomness](#randomness)
     * [Pre C++11: `rand()`](#pre-c11--rand)
     * [Post C++11: `#include <random>`](#post-c11--include-random)
+  * [OOP Nonsense](#oop-nonsense)
+    * [Encapsulation](#encapsulation)
+    * [UML Visibility Prefixes](#uml-visibility-prefixes)
+  * [Operator Overloading](#operator-overloading)
+    * [Can Overload](#can-overload)
+    * [Cannot overload](#cannot-overload)
 * [Notes from Sites](#notes-from-sites)
   * [Operators](#operators)
 <!-- TOC -->
@@ -578,6 +584,52 @@ int main() {
           }
       }
       ```
+
+## OOP Nonsense
+
+### Encapsulation
+* To hide components in a container.
+  * Encapsulation is an example of a black box.
+* To access these hidden components, an interface is required.
+  * For example, getter setter for a private variable.
+* The `private` keyword encapsulates.
+  * But it is a compiler setting, same as `const`.
+  * Use pointers to indirectly target the private or const variable.
+  * Allows user to access or modify the variable.
+
+### UML Visibility Prefixes
+* `+` is the public member
+* `-` is the private member
+* `#` is the protected member
+* `/` is the derived member
+* `~` is the package member
+* Therefore:
+  * ```
+    +---------------------+
+    |       Person        |
+    +---------------------+
+    | - name: string      |
+    | - age: int          |
+    | - height: float     |
+    +---------------------+
+    | + getName(): string |
+    +---------------------|
+    ```
+
+## Operator Overloading
+
+### Can Overload
+* Binary Operators
+  * `+` `-` `*` `/` `%` `>` `<`
+* Unary Operators
+  * `!` `++` `--` `&` `->`
+
+### Cannot overload
+* `.` - Member access operator
+* `*` - Pointer operator
+* `::` - Scope resolution operator
+* `? :` - Conditional operator
+* `sizeof()` - function
 
 # Notes from Sites
 
